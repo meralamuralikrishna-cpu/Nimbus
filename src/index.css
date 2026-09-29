@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink: #0c1929;
+  --color-ink-soft: #3d556c;
+  --color-mist: #7f98ad;
+  --color-sky: #cfe6f5;
+  --color-sky-deep: #6eafd4;
+  --color-cloud: #f4f9fc;
+  --color-cyan: #0899bf;
+  --color-cyan-deep: #067890;
+  --color-rain: #4578a8;
+  --color-sun: #efb84a;
+  --color-horizon: #9fd0ea;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    background:
+      radial-gradient(ellipse 80% 50% at 0% 0%, #a9d4ee 0%, transparent 50%),
+      radial-gradient(ellipse 60% 45% at 100% 5%, #8fc4e4 0%, transparent 48%),
+      radial-gradient(ellipse 50% 40% at 50% 100%, #d4eaf6 0%, transparent 55%),
+      linear-gradient(165deg, #c5e0f2 0%, #dceef8 42%, #eef6fb 100%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: rgb(8 153 191 / 0.22);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .sky-grain {
+    background-image:
+      radial-gradient(circle at 18% 28%, rgb(255 255 255 / 0.5) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 72% 58%, rgb(255 255 255 / 0.28) 0 1px, transparent 1.5px),
+      radial-gradient(circle at 42% 82%, rgb(255 255 255 / 0.2) 0 1px, transparent 1.5px);
+    background-size: 42px 42px, 68px 68px, 54px 54px;
+  }
+
+  .glass-panel {
+    background: rgb(255 255 255 / 0.55);
+    backdrop-filter: blur(14px);
+    box-shadow:
+      0 1px 0 rgb(255 255 255 / 0.65) inset,
+      0 12px 40px rgb(15 40 70 / 0.06);
+  }
+
+  .temp-glow {
+    text-shadow: 0 0 48px rgb(255 255 255 / 0.55);
+  }
+
+  .animate-drift {
+    animation: drift 18s ease-in-out infinite;
+  }
+
+  .animate-drift-slow {
+    animation: drift 28s ease-in-out infinite reverse;
+  }
+
+  .animate-float {
+    animation: float-y 5.5s ease-in-out infinite;
+  }
+
+  .animate-rise {
+    animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-rise-delay {
+    animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+  }
+
+  .animate-rise-late {
+    animation: rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+  }
+
+  .animate-rain {
+    animation: rain-fall 1.05s linear infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 3.2s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2.8s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 28s linear infinite;
+  }
+
+  .stagger > * {
+    animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .stagger > *:nth-child(1) { animation-delay: 0.04s; }
+  .stagger > *:nth-child(2) { animation-delay: 0.08s; }
+  .stagger > *:nth-child(3) { animation-delay: 0.12s; }
+  .stagger > *:nth-child(4) { animation-delay: 0.16s; }
+  .stagger > *:nth-child(5) { animation-delay: 0.2s; }
+  .stagger > *:nth-child(6) { animation-delay: 0.24s; }
+  .stagger > *:nth-child(7) { animation-delay: 0.28s; }
+  .stagger > *:nth-child(8) { animation-delay: 0.32s; }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(22px, -10px);
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rain-fall {
+  from {
+    transform: translateY(-130%) rotate(12deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.65;
+  }
+  to {
+    transform: translateY(140%) rotate(12deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
